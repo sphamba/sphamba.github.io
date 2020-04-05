@@ -1,0 +1,295 @@
+@font-face {
+    font-family: 'fira_sans_condensedheavy';
+    src: url('fonts/fira-sans-condensed.heavy-webfont.woff2') format('woff2'),
+         url('fonts/fira-sans-condensed.heavy-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+body {
+	background: #600;
+	background: linear-gradient(135deg, #700, #400);
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	font-family: fira_sans_condensedheavy, sans-serif;
+	font-weight: bold;
+	color: white;
+	cursor: default
+}
+
+#screen {
+	position: absolute;
+	/*border: 1px solid #faa;*/
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#titleScreen, #slide {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	transition: opacity 1s;
+}
+
+#slide {
+	opacity: 0;
+	display: none;
+}
+
+/* Title screen */
+
+#title {
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	width: 100%;
+	transform: translate(-50%, 0);
+	opacity: 1;
+	display: block;
+	font-size: 3em;
+	text-shadow: 0 0 1em rgba(0, 0, 0, 0.7);
+}
+
+#titleWhat, #titleHow, #titleWhy {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+	width: 30%;
+	background-color: #fff;
+	padding: 2% 0 1.5% 0;
+	border-radius: 200px; /* maxed */
+	color: #400;
+	font-size: 1.5em;
+	transition: background-color 0.3s;
+	box-shadow: 0 0 4em rgba(0, 0, 0, 0.5);
+}
+
+#titleWhat:hover, #titleHow:hover, #titleWhy:hover, #titlePlayground:hover {
+	background-color: #edd;
+	cursor: pointer;
+}
+
+#titleWhat {
+	top: 30%;
+}
+
+#titleHow {
+	top: 50%;
+}
+
+#titleAnd {
+	position: absolute;
+	top: 63%;
+	left: 50%;
+	transform: translate(-50%, 0);
+	font-size: 1.2em
+}
+
+#titleWhy {
+	top: 70%;
+}
+
+#titleMark {
+	position: absolute;
+	bottom: 1%;
+	left: 1.5%;
+	font-size: 0.8em;
+}
+
+#titlePlayground {
+	position: absolute;
+	bottom: 2%;
+	right: 1%;
+	width: 20%;
+	background-color: #fff;
+	color: #400;
+	padding: 1% 0;
+	border-radius: 200px; /* maxed */
+	transition: background-color 0.3s;
+	box-shadow: 0 0 4em rgba(0, 0, 0, 0.5);
+}
+
+/* Slide */
+
+#home, #previous, #next {
+	transition: transform 0.3s;
+}
+
+/* buttons */
+
+#home {
+	position: absolute;
+	top: 1%;
+	left: 0.8%;
+	width: 4.5%;
+	padding-bottom: 4.5%;
+	background: url(images/home.svg);
+	background-size: 100% 100%;
+}
+
+#previous {
+	display: block;
+	position: absolute;
+	top: 40%;
+	left: 0;
+	width: 5%;
+	height: 20%;
+	background-color: black;
+	background: url(images/arrow.svg);
+	background-size: 100% 100%;
+}
+
+#next {
+	display: block;
+	position: absolute;
+	top: 40%;
+	right: 0;
+	width: 5%;
+	height: 20%;
+	background-color: black;
+	background: url(images/arrow.svg);
+	background-size: 100% 100%;
+	transform: rotate(180deg);
+}
+
+#previous:hover {
+	transform: scale(1.15);
+	cursor: pointer;
+}
+
+#next:hover {
+	transform: rotate(180deg) scale(1.15);
+	cursor: pointer;
+}
+
+#home:hover {
+	transform: rotate(-90deg);
+	cursor: pointer;
+}
+
+/* content */
+
+#mainText {
+	position: absolute;
+	bottom: 5%;
+	left: 5%;
+	width: 90%;
+	font-size: 1em;
+	transition: opacity 0.5s;
+}
+
+#mainText .S {
+	color: #0c4;
+}
+
+#mainText .R {
+	color: #46e;
+}
+
+#mainText .I {
+	color: #d00;
+}
+
+#mainText .H {
+	color: #fdd;
+}
+
+#mainText .D {
+	color: #888;
+}
+
+#diagram {
+	position: absolute;
+	top: 5%;
+	left: 5%;
+	width: 90%;
+	height: 75%;
+	transition: opacity 0.5s;
+	/*background-color: white;*/
+	opacity: 0;
+}
+
+#graph1, #graph2, #graph3 {
+	position: absolute;
+	top: 0;
+	left: 5%;
+	transition-property: opacity, width, height, top, left;
+	transition-duration: 0.5s;
+	opacity: 0;
+	
+	/*border: 1px solid white*/
+}
+
+
+/* Sliders */
+
+#sliders {
+	display: block;
+	position: absolute;
+	top: 70%;
+	left: 0;
+	width: 100%;
+	height: 30%;
+	/*background-color: white;*/
+	transition-property: top, left;
+	transition-duration: 0.3s;
+}
+
+.sliderContainer {
+	position: relative;
+	display: inline-block;
+	opacity: 0;
+	width: 49%;
+	height: 0;
+	padding-bottom: 2%;
+	font-size: 0.75em;
+	transition-property: opacity;
+	transition-duration: 0.2s;
+}
+
+.sliderName {
+	display: inline-block;
+	position: absolute;
+	top: 10%;
+	right: 62%;
+	text-align: left;
+}
+
+.slider {
+	display: inline-block;
+	position: absolute;
+	top: 10%;
+	left: 40%;
+	width: 40%;
+	
+	-webkit-appearance: none;
+	appearance: none;
+	outline: none;
+	height: 5%;
+	margin-top: 2.2%;
+	background-color: #a44;
+}
+
+.slider::-webkit-slider-thumb, .slider::-moz-range-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 8%;
+	height: 1580%;
+	border-radius: 50%;
+	background-color: #fff;
+	border: none;
+	cursor: pointer;
+}
+
+.sliderInfo {
+	display: inline-block;
+	position: absolute;
+	top: 10%;
+	left: 82%;
+}
