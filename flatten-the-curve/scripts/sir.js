@@ -35,9 +35,9 @@ var sI_tab = null;
 var sR_tab = null;
 var sD_tab = null;
 
-var tol = 2e-3; // precision for integration
-var h_max = 5;
-var h_min = 1e-2;
+var tol = 1e-5; // precision for integration
+var h_max = 10;
+var h_min = 5e-2;
 
 
 function simulate() {
@@ -70,20 +70,47 @@ function simulate() {
 	while (t < timeEnd) {
 		let y = [S, I, H, R, D];
 		let k1 = derivative(t,  y);
-		let k2;
 		
 		let h_safe = h_min;
+		let dy_dh;
 		
-		while (true) {
-			k2 = derivative(t + h, array_sum(y, array_mul(k1, h)));
+		
+		// let k2; // Heun-Euler, order 2 and 1
+		// while (true) {
+		// 	k2 = derivative(t + h, array_sum(y, array_mul(k1, h)));
+			
+		// 	// estimate error
+		// 	let err = array_sum(array_mul(k1, -0.5), array_mul(k2, 0.5));
+		// 	err = h * err.reduce((max, curr) => Math.max(max, Math.abs(curr)));
+			
+		// 	// estimate save step size
+		// 	// h_safe = h * Math.pow(tol / err, 1 / err_order);
+		// 	h_safe = h * tol / err; // because err_order = 1
+		// 	if (h_safe < h_min) h_safe = h_min;
+			
+		// 	// adjust h if too big and recompute the k
+		// 	if (h > h_safe) {
+		// 		h = h_safe;
+		// 	} else {
+		// 		break;
+		// 	}
+		// }
+		// dy_dh = array_sum(array_mul(k1, 0.5), array_mul(k2, 0.5));
+		
+		
+		while (true) { // Bodacki-Shampine, order 3 and 2
+			let k2 = derivative(t + 0.5  * h, array_sum(y, array_mul(k1, 0.5  * h)));
+			let k3 = derivative(t + 0.75 * h, array_sum(y, array_mul(k2, 0.75 * h)));
+			dy_dh = array_sum(array_mul(k1, 2/9), array_sum(array_mul(k2, 1/3), array_mul(k3, 4/9)));
+			let k4 = derivative(t + h, array_sum(y, array_mul(dy_dh, h)));
 			
 			// estimate error
-			let err = array_sum(array_mul(k1, -0.5), array_mul(k2, 0.5));
-			err = err.reduce((max, curr) => Math.max(max, Math.abs(curr)));
+			let err = array_sum(array_mul(k1, -5/72), array_sum(array_mul(k2, 1/12), array_sum(array_mul(k3, 1/9), array_mul(k4, -1/8))));
+			err = h * err.reduce((max, curr) => Math.max(max, Math.abs(curr)));
 			
 			// estimate save step size
 			// h_safe = h * Math.pow(tol / err, 1 / err_order);
-			h_safe = h * tol / err; // because err_order = 1
+			h_safe = h * Math.sqrt(tol / err); // because err_order = 2
 			if (h_safe < h_min) h_safe = h_min;
 			
 			// adjust h if too big and recompute the k
@@ -97,7 +124,6 @@ function simulate() {
 		// stop at max time
 		if (t + h > timeEnd) h = timeEnd - t;
 
-		dy_dh = array_sum(array_mul(k1, 0.5), array_mul(k2, 0.5));
 		[S, I, H, R, D] = array_sum(y, array_mul(dy_dh, h));
 		
 		if (!vaccine_given && t > vaccineDay) {
