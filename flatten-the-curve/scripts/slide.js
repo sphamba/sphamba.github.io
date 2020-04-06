@@ -462,59 +462,20 @@ var slidesHow = [
 	
 	new Slide(`<u>An epidemic outbreak is possible when R<sub>0</sub> is greater than 1</u>.<br>Here, R<sub>0</sub> = `,
 		function() {
-			let R0 = document.createElement("span");
-			$("mainText").append(R0);
+			addR0indicator();
 			$("mainText").append(document.createElement("br"));
 			$("mainText").append(`Play with the sliders to verify this theory!`);
-			
-			let updateR0 = function() {
-				R0.innerHTML = (sliders.contactsPerDay.value * sliders.probInfection.value * sliders.daysInfectious.value).toFixed(2);
-			};
-			
-			updateR0();
-			
-			sliders.contactsPerDay.slider.oninput = function() {
-				sliders.contactsPerDay.update();
-				updateR0();
-			};
-			
-			sliders.probInfection.slider.oninput = function() {
-				sliders.probInfection.update();
-				updateR0();
-			};
-		},
-		function() { // revert to default
-			sliders.contactsPerDay.slider.oninput = function() {
-				sliders.contactsPerDay.update();
-			};
-			
-			sliders.probInfection.slider.oninput = function() {
-				sliders.probInfection.update();
-			};
 		},
 		function() {
-			let R0 = document.createElement("span");
-			$("mainText").append(R0);
+			removeR0indicator();
+		},
+		function() {
+			addR0indicator();
 			$("mainText").append(document.createElement("br"));
 			$("mainText").append(`Play with the sliders to verify this theory!`);
-			
-			let updateR0 = function() {
-				R0.innerHTML = (sliders.contactsPerDay.value * sliders.probInfection.value * sliders.daysInfectious.value).toFixed(2);
-			};
-			
-			updateR0();
-			
-			sliders.contactsPerDay.slider.oninput = function() {
-				sliders.contactsPerDay.update();
-				updateR0();
-			};
-			
-			sliders.probInfection.slider.oninput = function() {
-				sliders.probInfection.update();
-				updateR0();
-			};
 		},
 		function() {
+			removeR0indicator();
 			sliders.timeEnd.animTo(180);
 		}),
 	
@@ -812,7 +773,7 @@ var slidesWhy = [
 			diagram.hide("H_to_D");
 		}),
 
-	new Slide(`Let's show the current cases and new cases per day, for now with a fixed <i>Curve</i> height.`,
+	new Slide(`Let's show the current cases and new cases per day, with a fixed <i>Curve</i> height for the moment.`,
 		function() {
 			graph1.show()
 			graph2.show();
@@ -862,7 +823,7 @@ var slidesWhy = [
 		},
 		()=>0),
 
-	new Slide(`Playing with the <span class="H">Hospital</span> capacity slider, you will understand that the <u>outbreak suddently occurs when the number of <span class="I">Infected</span> overcomes the <span class="H">Hospital</span> capacity</u>. See how the number of cases suddently change (around 5.2% capacity in this case).`,
+	new Slide(`Playing with the <span class="H">Hospital</span> capacity slider, you will understand that the <u>outbreak suddently occurs when the number of <span class="I">Infected</span> overcomes the <span class="H">Hospital</span> capacity</u>. See how the number of cases suddently change (around 5.2% capacity in this example).`,
 		function() {
 			sliders.hospitalCapacity.show();
 			graph3.update();
@@ -879,7 +840,7 @@ var slidesWhy = [
 			graph3.hide();
 		}),
 
-	new Slide(`Now that we have <span class="H">Hospitals</span>, test the different actions you have learned about in the previous chapter to flatten <i>the Curve</i>. See how the <span class="D">Death</span> count is affected by the height of <i>the Curve</i> compared to the <span class="H">Hospitals</span> capacity.`,
+	new Slide(`Now that we have <span class="H">Hospitals</span>, test the different actions you have learned about in the previous chapter to flatten <i>the Curve</i>. See how the <span class="D">Death</span> count is affected by the height of <i>the Curve</i> compared to the <span class="H">Hospital</span> capacity.`,
 		()=>0,
 		()=>0,
 		()=>0,
@@ -887,14 +848,18 @@ var slidesWhy = [
 			sliders.hospitalCapacity.show();
 		}),
 
-	new Slide(`Start with the number of close contacts per day and the infection probability.<br>`,
+	new Slide(`Start with the number of close contacts per day and the infection probability. <span class="H">Hospitals</span> are great to prevent outbreaks!<br>R<sub>0</sub> = `,
 		function() {
 			selectVisibleSliders({
 				contactsPerDay: true,
 				probInfection: true
 			});
+			
+			addR0indicator();
 		},
 		function() {
+			removeR0indicator();
+			
 			selectVisibleSliders({});
 			sliders.timeEnd.animTo(365, false);
 			sliders.contactsPerDay.animTo(10, false);
@@ -907,11 +872,15 @@ var slidesWhy = [
 				contactsPerDay: true,
 				probInfection: true
 			});
+			
+			addR0indicator();
 		},
 		function() {
 			selectVisibleSliders({});
 			sliders.contactsPerDay.animTo(10, false);
 			sliders.probInfection.animTo(0.2);
+			
+			removeR0indicator();
 		}),
 
 	new Slide(`At last, try to implement an isolation period. Be sure to minimize the number of <span class="D">Deaths</span>.`,
@@ -1036,3 +1005,35 @@ playground = [
 			graph3.show();
 		})
 ];
+
+
+function addR0indicator() {
+	let R0 = document.createElement("span");
+	$("mainText").append(R0);
+	
+	let updateR0 = function() {
+		R0.innerHTML = (sliders.contactsPerDay.value * sliders.probInfection.value * sliders.daysInfectious.value).toFixed(2);
+	};
+	
+	updateR0();
+	
+	sliders.contactsPerDay.slider.oninput = function() {
+		sliders.contactsPerDay.update();
+		updateR0();
+	};
+	
+	sliders.probInfection.slider.oninput = function() {
+		sliders.probInfection.update();
+		updateR0();
+	};
+}
+
+function removeR0indicator() {
+	sliders.contactsPerDay.slider.oninput = function() {
+		sliders.contactsPerDay.update();
+	};
+	
+	sliders.probInfection.slider.oninput = function() {
+		sliders.probInfection.update();
+	};
+}
