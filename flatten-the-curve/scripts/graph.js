@@ -3,7 +3,7 @@ const R_COLOR = "#46e";
 const I_COLOR = "#d00";
 const H_COLOR = "#fdd";
 const D_COLOR = "#888";
-const FONT_NAME = "fira_sans_condensedheavy";
+const FONT_NAME = "fira_sans_condensedheavy, sans-serif";
 const THRESH_MIN = 1e-5;
 
 
@@ -153,13 +153,14 @@ class Graph {
 			let x1 = this.right;
 			if (isolationStart + isolationDuration <= timeEnd) {
 				x1 = this.left + (isolationStart + isolationDuration) / timeEnd * this.width;
+				
+				this.ctx.beginPath();
+				this.ctx.moveTo(x1, this.top);
+				this.ctx.lineTo(x1, this.bottom);
+				this.ctx.stroke();
+				
+				this.ctx.setLineDash([]);
 			}
-			this.ctx.beginPath();
-			this.ctx.moveTo(x1, this.top);
-			this.ctx.lineTo(x1, this.bottom);
-			this.ctx.stroke();
-			
-			this.ctx.setLineDash([]);
 			
 			// fill
 			this.ctx.fillStyle = "rgba(128, 128, 128, 0.2)";
@@ -267,6 +268,7 @@ class GraphFilled extends Graph {
 	
 	plot(values, color) {
 		this.ctx.fillStyle = color;
+		this.ctx.lineJoin = "round";
 		
 		this.ctx.beginPath();
 		this.ctx.moveTo(this.left, this.bottom);
@@ -443,27 +445,44 @@ var graph3 = new GraphCurves("graph3", function() {
 var slideAnimFrame = 0;
 var slideAnimFrameMax = 45;
 
-function launchAnimation(updateParamFunc, updateGraph1, updateGraph2, updateGraph3) {
+function launchAnimation(updateParamFunc, updateGraph1=false, updateGraph2=false, updateGraph3=false) {
 	slideAnimFrame = 0;
 	
 	function updateAnimation() {
 		updateParamFunc(++slideAnimFrame / slideAnimFrameMax);
-		simulate();
-		if (updateGraph1) {
-			graph1.update();
-			graph1.plotAll();
-		}
-		if (updateGraph2) {
-			graph2.update();
-			graph2.plotAll();
-		}
-		if (updateGraph3) {
-			graph3.update();
-			graph3.plotAll();
-		}
+		// simulate();
+		// if (updateGraph1) {
+		// 	graph1.update();
+		// 	graph1.plotAll();
+		// }
+		// if (updateGraph2) {
+		// 	graph2.update();
+		// 	graph2.plotAll();
+		// }
+		// if (updateGraph3) {
+		// 	graph3.update();
+		// 	graph3.plotAll();
+		// }
 		
-		if (slideAnimFrame < slideAnimFrameMax) {
+		if (slideAnimFrame <= slideAnimFrameMax) { // overshot for rounding errors
 			requestAnimationFrame(updateAnimation);
+		} else { // update graphs at the end to be sure
+			simulate();
+			
+			if (graph1.visible) {
+				graph1.update();
+				graph1.plotAll();
+			}
+			
+			if (graph2.visible) {
+				graph2.update();
+				graph2.plotAll();
+			}
+			
+			if (graph3.visible) {
+				graph3.update();
+				graph3.plotAll();
+			}
 		}
 	}
 	
@@ -471,6 +490,7 @@ function launchAnimation(updateParamFunc, updateGraph1, updateGraph2, updateGrap
 }
 
 function ease(x, min, max) { // x from 0 to 1
+	x = (x > 1) ? 1 : x;
 	return min + (max - min) * (-2 * x*x*x + 3 * x*x);
 }
 

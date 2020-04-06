@@ -9,17 +9,21 @@ class Diagram {
 		this.animFrameMax = 30;
 		
 		this.nodes = {
-			S: new Node(0.3,  0.5,  0.1,  "S", S_COLOR, this),
-			I: new Node(0.55, 0.5,  0.07, "I", I_COLOR, this),
-			R: new Node(0.65, 0.25, 0.04, "R", R_COLOR, this),
-			D: new Node(0.65, 0.75, 0.03, "D", D_COLOR, this)
+			S: new Node(0.28, 0.5, 0.1,  "S", S_COLOR, this),
+			I: new Node(0.53, 0.5, 0.07, "I", I_COLOR, this),
+			R: new Node(0.64, 0.2, 0.04, "R", R_COLOR, this),
+			D: new Node(0.64, 0.8, 0.03, "D", D_COLOR, this),
+			H: new Node(0.75, 0.5, 0.07, "H", H_COLOR, this),
 		};
 		
 		this.arrows = {
 			S_to_I: new Arrow(this.nodes.S, this.nodes.I, this),
 			I_to_R: new Arrow(this.nodes.I, this.nodes.R, this),
 			I_to_D: new Arrow(this.nodes.I, this.nodes.D, this),
-			R_to_S: new Arrow(this.nodes.R, this.nodes.S, this)
+			R_to_S: new Arrow(this.nodes.R, this.nodes.S, this),
+			I_to_H: new Arrow(this.nodes.I, this.nodes.H, this),
+			H_to_R: new Arrow(this.nodes.H, this.nodes.R, this),
+			H_to_D: new Arrow(this.nodes.H, this.nodes.D, this),
 		}
 	}
 	
@@ -47,10 +51,14 @@ class Diagram {
 			I: this.nodes.I,
 			R: this.nodes.R,
 			D: this.nodes.D,
+			H: this.nodes.H,
 			S_to_I: this.arrows.S_to_I,
 			I_to_R: this.arrows.I_to_R,
 			I_to_D: this.arrows.I_to_D,
-			R_to_S: this.arrows.R_to_S
+			R_to_S: this.arrows.R_to_S,
+			I_to_H: this.arrows.I_to_H,
+			H_to_R: this.arrows.H_to_R,
+			H_to_D: this.arrows.H_to_D,
 		}[name];
 		
 		function updateAnimation() {

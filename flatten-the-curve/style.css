@@ -1,10 +1,9 @@
 @font-face {
-    font-family: 'fira_sans_condensedheavy';
-    src: url('fonts/fira-sans-condensed.heavy-webfont.woff2') format('woff2'),
-         url('fonts/fira-sans-condensed.heavy-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
+	font-family: 'fira_sans_condensedheavy';
+	src: url('fonts/fira-sans-condensed.heavy-webfont.woff2') format('woff2'),
+	     url('fonts/fira-sans-condensed.heavy-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 
 
@@ -12,12 +11,11 @@ body {
 	background: #600;
 	background: linear-gradient(135deg, #700, #400);
 	background-repeat: no-repeat;
-    background-attachment: fixed;
+	background-attachment: fixed;
 	overflow: hidden;
 	margin: 0;
 	padding: 0;
 	font-family: fira_sans_condensedheavy, sans-serif;
-	font-weight: bold;
 	color: white;
 	cursor: default
 }
@@ -53,6 +51,7 @@ body {
 	opacity: 1;
 	display: block;
 	font-size: 3em;
+	font-weight: bold;
 	text-shadow: 0 0 1em rgba(0, 0, 0, 0.7);
 }
 
@@ -66,6 +65,7 @@ body {
 	border-radius: 200px; /* maxed */
 	color: #400;
 	font-size: 1.5em;
+	font-weight: bold;
 	transition: background-color 0.3s;
 	box-shadow: 0 0 4em rgba(0, 0, 0, 0.5);
 }
@@ -109,6 +109,7 @@ body {
 	width: 20%;
 	background-color: #fff;
 	color: #400;
+	font-weight: bold;
 	padding: 1% 0;
 	border-radius: 200px; /* maxed */
 	transition: background-color 0.3s;

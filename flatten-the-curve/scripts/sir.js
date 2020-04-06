@@ -70,18 +70,33 @@ function simulate() {
 	while (t < timeEnd) {
 		let y = [S, I, H, R, D];
 		let k1 = derivative(t,  y);
-		let k2 = derivative(t + h, array_sum(y, array_mul(k1, h)));
+		let k2;
 		
-		// estimate error
-		let err = array_sum(array_mul(k1, -0.5), array_mul(k2, 0.5));
-		let err_max = err.reduce((max, curr) => Math.max(max, Math.abs(curr)));
-		// scale h to match error to tolerance
-		// h = Math.max(h_min, Math.min(h_max, h * Math.pow(tol / err_max, 1 / err_order)));
-		h = Math.max(h_min, Math.min(h_max, h * tol / err_max)); // err_order = 1
+		let h_safe = h_min;
+		
+		while (true) {
+			k2 = derivative(t + h, array_sum(y, array_mul(k1, h)));
+			
+			// estimate error
+			let err = array_sum(array_mul(k1, -0.5), array_mul(k2, 0.5));
+			err = err.reduce((max, curr) => Math.max(max, Math.abs(curr)));
+			
+			// estimate save step size
+			// h_safe = h * Math.pow(tol / err, 1 / err_order);
+			h_safe = h * tol / err; // because err_order = 1
+			if (h_safe < h_min) h_safe = h_min;
+			
+			// adjust h if too big and recompute the k
+			if (h > h_safe) {
+				h = h_safe;
+			} else {
+				break;
+			}
+		}
+		
+		// stop at max time
 		if (t + h > timeEnd) h = timeEnd - t;
-		
-		// compute next step
-		k2 = derivative(t + h, array_sum(y, array_mul(k1, h)));
+
 		dy_dh = array_sum(array_mul(k1, 0.5), array_mul(k2, 0.5));
 		[S, I, H, R, D] = array_sum(y, array_mul(dy_dh, h));
 		
@@ -108,6 +123,11 @@ function simulate() {
 		sI_tab.push(sI_tab[sI_tab.length - 1] + h * nI_tab[nI_tab.length - 1]);
 		sR_tab.push(sR_tab[sR_tab.length - 1] + h * nR_tab[nR_tab.length - 1]);
 		// sD_tab.push(sD_tab[sD_tab.length - 1] + h * nD_tab[nD_tab.length - 1]);
+		
+		
+		// adjust h for next time step if h_safe > h
+		h = h_safe;
+		if (h > h_max) h = h_max;
 	}
 	
 	sD_tab = D_tab;

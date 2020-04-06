@@ -39,14 +39,17 @@ class Slider {
 	get sliderValue() { return parseFloat(this.slider.value); }
 	
 	
-	update(sliderValue) {
-		if (sliderValue) {
+	update(sliderValue, updateGraphs=true) {
+		if (sliderValue !== undefined) {
 			this.slider.value = sliderValue;
 		}
 		
 		this.value = parseFloat(this.transformFunc(this.slider.value));
 		this.display.innerHTML = this.displayFunc(this.value);
 		window[this.varName] = this.value;
+		
+		if (!updateGraphs) return;
+		
 		simulate();
 		
 		if (graph1.visible) {
@@ -77,6 +80,16 @@ class Slider {
 		let c = this.container;
 		c.style.display = "inline-block";
 		setTimeout(function() { c.style.opacity = 1; }, 10);
+	}
+	
+	
+	animTo(sliderValue, updateGraphs=true) { // when called multiple times at the same time, only put updateGraphs to true for one of the instances
+		let initSliderValue = this.sliderValue;
+		let s = this;
+		
+		launchAnimation(function(x) {
+			s.update(ease(x, initSliderValue, sliderValue), updateGraphs);
+		});
 	}
 }
 
@@ -130,7 +143,7 @@ var sliders = {
 		}),
 	
 	daysInfectious: new Slider("daysInfectious", "Infection duration",
-		1, 29, 1, 10,
+		1, 29, 0.1, 10,
 		(x)=>daysMonths(x, "permanent"),
 		function(x) {
 			return (x == 29) ? Infinity : x;
@@ -142,7 +155,7 @@ var sliders = {
 		(x)=>x*x),
 	
 	daysImmunity: new Slider("daysImmunity", "Immunity duration",
-		1, 366, 1, 62,
+		1, 366, 0.1, 62,
 		(x)=>daysMonths(x, "permanent"),
 		function(x) {
 			return (x == 366) ? Infinity : x;
@@ -173,7 +186,7 @@ var sliders = {
 		(x)=>x*x),
 	
 	contactsPerDayIsolation: new Slider("contactsPerDayIsolation", "Contacts/day isolation",
-		0, 10, 0.1, 2),
+		0, 10, 0.1, 3),
 	
 	vaccineDay: new Slider("vaccineDay", "Vaccination day",
 		0, 731, 1, 731,
