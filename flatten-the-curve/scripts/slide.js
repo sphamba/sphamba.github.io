@@ -198,7 +198,7 @@ var slidesWhat = [
 		function() {
 			sliders.timeEnd.update(10);
 			
-			initialContamination = 0.01;
+			initialContamination = -2;
 			contactsPerDay = 10;
 			probInfection = 0.04;
 			daysInfectious = 28;
@@ -285,7 +285,7 @@ var slidesHow = [
 			graph1.move(15, 20, 60, 60);
 			
 			sliders.timeEnd.             update(180);
-			sliders.initialContamination.update(0.1);   // 1%
+			sliders.initialContamination.update(-2);   // 1%
 			sliders.contactsPerDay.      update(10);
 			sliders.probInfection.       update(0.2);   // 4%
 			sliders.daysInfectious.      update(10);
@@ -679,7 +679,7 @@ var slidesWhy = [
 			graph1.move(15, 20, 60, 60);
 			
 			sliders.timeEnd.             update(180);
-			sliders.initialContamination.update(0.1);   // 1%
+			sliders.initialContamination.update(-2);   // 1%
 			sliders.contactsPerDay.      update(10);
 			sliders.probInfection.       update(0.2);   // 4%
 			sliders.daysInfectious.      update(10);
@@ -956,7 +956,7 @@ playground = [
 			showSliders();
 			
 			sliders.timeEnd.                update(180);
-			sliders.initialContamination.   update(0.1);   // 1%
+			sliders.initialContamination.   update(-2);   // 1%
 			sliders.contactsPerDay.         update(10);
 			sliders.probInfection.          update(0.2);   // 4%
 			sliders.daysBeforeHospital.     update(4);

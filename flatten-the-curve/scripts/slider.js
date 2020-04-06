@@ -100,9 +100,12 @@ function finePercentage(x) {
 	                    Math.round(10000 * x) / 100 + "%";
 }
 
+function finerPercentage(x) {
+	return (x > 0.5)  ? Math.round(100 * x) + "%" :
+	       parseFloat((100 * x).toPrecision(2)) + "%";
+}
+
 function daysMonths(x, neverWord) {
-	
-	
 	return !isFinite(x) ? neverWord :
 		(x >= 384) ? Math.round(10 * x / 365) / 10 + " years" :
 		(x >= 350) ? 1 + " year" :
@@ -123,9 +126,9 @@ var sliders = {
 		}),
 	
 	initialContamination: new Slider("initialContamination", "Initial contamination",
-		0, 1, 0.001, 0.1,
-		finePercentage,
-		(x)=>x*x),
+		-6, 0, 0.01, -4,
+		finerPercentage,
+		(x)=>Math.pow(10, x)),
 	
 	contactsPerDay: new Slider("contactsPerDay", "Contacts per day",
 		0, 50, 0.1, 10),

@@ -277,15 +277,27 @@ body {
 	background-color: #a44;
 }
 
-.slider::-webkit-slider-thumb, .slider::-moz-range-thumb {
+.slider::-webkit-slider-thumb { /*Webkit*/
 	-webkit-appearance: none;
-	appearance: none;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: #fff;
+	border: none;
+	cursor: pointer;
+}
+
+.slider::-moz-range-thumb { /*Firefox*/
 	width: 8%;
 	height: 1580%;
 	border-radius: 50%;
 	background-color: #fff;
 	border: none;
 	cursor: pointer;
+}
+
+.slider:focus {
+	outline: none;
 }
 
 .sliderInfo {
