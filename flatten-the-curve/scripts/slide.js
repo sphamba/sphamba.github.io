@@ -198,7 +198,7 @@ var slidesWhat = [
 		function() {
 			sliders.timeEnd.update(10);
 			
-			initialContamination = -2;
+			initialContamination = 0.01;
 			contactsPerDay = 10;
 			probInfection = 0.04;
 			daysInfectious = 28;
