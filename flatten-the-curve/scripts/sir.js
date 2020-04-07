@@ -131,7 +131,7 @@ function simulate() {
 			S = 0;
 			vaccine_given = true;
 		}
-		// I = Math.max(I, 0);
+		if (I < 0) I = 0;
 		D = N - S - I - H - R;
 		t += h;
 		
