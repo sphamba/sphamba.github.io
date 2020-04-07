@@ -683,7 +683,7 @@ var slidesWhy = [
 			sliders.contactsPerDay.      update(10);
 			sliders.probInfection.       update(0.2);   // 4%
 			sliders.daysInfectious.      update(10);
-			sliders.daysImmunity.        update(366);   // forever
+			sliders.daysImmunity.        update(180);
 			sliders.mortality.           update(0.316); // 10%
 			
 			sliders.isolationStart.         update(366);   // never
@@ -823,7 +823,7 @@ var slidesWhy = [
 		},
 		()=>0),
 
-	new Slide(`Playing with the <span class="H">Hospital</span> capacity slider, you will understand that the <u>outbreak suddently occurs when the number of <span class="I">Infected</span> overcomes the <span class="H">Hospital</span> capacity</u>. See how the number of cases suddently change (around 5.2% capacity in this example).`,
+	new Slide(`Playing with the <span class="H">Hospital</span> capacity slider, you will understand that the <u>outbreak suddently occurs when the number of <span class="I">Infected</span> overcomes the <span class="H">Hospital</span> capacity</u>. See how the number of cases suddently change (around 5.3% capacity in this example).`,
 		function() {
 			sliders.hospitalCapacity.show();
 			graph3.update();
@@ -863,7 +863,7 @@ var slidesWhy = [
 			selectVisibleSliders({});
 			sliders.timeEnd.animTo(365, false);
 			sliders.contactsPerDay.animTo(10, false);
-			sliders.probInfection.animTo(0.2, false);
+			sliders.probInfection.animTo(0.245, false); // 6%
 			sliders.isolationStart.animTo(180, false);
 			sliders.isolationDuration.animTo(62);
 		},
@@ -883,7 +883,24 @@ var slidesWhy = [
 			removeR0indicator();
 		}),
 
-	new Slide(`At last, try to implement an isolation period. Be sure to minimize the number of <span class="D">Deaths</span>.`,
+	new Slide(`At last, try to implement an isolation period. Are you able to prevent an outbreak?`,
+		function() {
+			selectVisibleSliders({
+				timeEnd: true,
+				isolationStart: true
+			});
+		},
+		()=>0,
+		()=>0,
+		function() {
+			selectVisibleSliders({});
+			sliders.timeEnd.animTo(180, false);
+			sliders.isolationStart.animTo(366, false);
+			sliders.isolationDuration.animTo(366, false);
+			sliders.contactsPerDayIsolation.animTo(3);
+		}),
+
+	new Slide(`The isolation period was <u>too short</u>! You probably just observed that it can have <u>disastrous consequences</u>. You can now control the isolation duration. Try to minimize the number of <span class="D">Deaths</span>.`,
 		function() {
 			selectVisibleSliders({
 				timeEnd: true,
@@ -912,10 +929,11 @@ var slidesWhy = [
 			graph3.show();
 		},
 		function() {
-			selectVisibleSliders({});
-			sliders.timeEnd.animTo(180, false);
-			sliders.isolationStart.animTo(366, false);
-			sliders.isolationDuration.animTo(366, false);
+			selectVisibleSliders({
+				timeEnd: true,
+				isolationStart: true
+			});
+			sliders.isolationDuration.animTo(62, false);
 			sliders.contactsPerDayIsolation.animTo(3);
 		}),
 
