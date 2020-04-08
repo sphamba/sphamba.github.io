@@ -865,7 +865,7 @@ var slidesWhy = [
 			sliders.contactsPerDay.animTo(10, false);
 			sliders.probInfection.animTo(0.245, false); // 6%
 			sliders.isolationStart.animTo(180, false);
-			sliders.isolationDuration.animTo(62);
+			sliders.isolationDuration.animTo(45);
 		},
 		function() {
 			selectVisibleSliders({
@@ -933,7 +933,7 @@ var slidesWhy = [
 				timeEnd: true,
 				isolationStart: true
 			});
-			sliders.isolationDuration.animTo(62, false);
+			sliders.isolationDuration.animTo(45, false);
 			sliders.contactsPerDayIsolation.animTo(3);
 		}),
 
