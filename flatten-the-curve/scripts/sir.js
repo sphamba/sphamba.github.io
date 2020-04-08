@@ -36,7 +36,7 @@ var sR_tab = null;
 var sD_tab = null;
 
 var tol = 1e-5; // precision for integration
-var h_max = 10;
+var h_max = 20;
 var h_min = 5e-2;
 
 
@@ -108,9 +108,14 @@ function simulate() {
 			let err = array_sum(array_mul(k1, -5/72), array_sum(array_mul(k2, 1/12), array_sum(array_mul(k3, 1/9), array_mul(k4, -1/8))));
 			err = h * err.reduce((max, curr) => Math.max(max, Math.abs(curr)));
 			
-			// estimate save step size
-			// h_safe = h * Math.pow(tol / err, 1 / err_order);
-			h_safe = h * Math.sqrt(tol / err); // because err_order = 2
+			// estimate safe step size
+			// if (err > tol) { // *cumulated* error has to be < tol, but adds a lot of points...
+			// 	// h_safe = h * Math.pow(tol / err, 1 / (err_order - 1));
+			// 	h_safe = h * tol / err; // because err_order = 2
+			// } else {
+				// h_safe = h * Math.pow(tol / err, 1 / err_order);
+				h_safe = h * Math.sqrt(tol / err); // because err_order = 2
+			// }
 			if (h_safe < h_min) h_safe = h_min;
 			
 			// adjust h if too big and recompute the k
@@ -126,7 +131,7 @@ function simulate() {
 
 		[S, I, H, R, D] = array_sum(y, array_mul(dy_dh, h));
 		
-		if (!vaccine_given && t > vaccineDay) {
+		if (!vaccine_given && t >= vaccineDay) {
 			R += S;
 			S = 0;
 			vaccine_given = true;
@@ -154,6 +159,10 @@ function simulate() {
 		// adjust h for next time step if h_safe > h
 		h = h_safe;
 		if (h > h_max) h = h_max;
+		
+		if (!vaccine_given && t + h >= vaccineDay) {
+			h = Math.max(vaccineDay - t, h_min);
+		}
 	}
 	
 	sD_tab = D_tab;
