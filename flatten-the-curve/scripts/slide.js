@@ -244,6 +244,8 @@ var slidesWhat = [
 			graph2.hide();
 		}),
 	
+	new Slide(`Beware! The graphs here show the <u>actual</u> number of cases. In real life, not all <span class="I">Infected</span> people get tested and recored. Even when they are, it is not immediatly at the moment they became contagious. Therefore, real statistics are <u>delayed</u> and <u>underestimate the numbers</u>.`),
+	
 	new Slide(`The evolution of the number of <span class="I">Infected</span> people follows what is called an <i>exponential growth</i>. It means that <u>the number of <span class="I">new cases</span> per day is proportional to the number of <span class="I">current cases</span></u>. <span class="I">Infection</span> is more likely when there are more <span class="I">Infected</span> people around.`),
 	
 	new Slide(`When the number of <span class="I"><i>current</i> cases</span> increases, the number of <span class="I"><i>new</i> appearing cases</span> also increases, and vice-versa. It seems like it will never stop! But let's look a bit further in time...`,
@@ -954,6 +956,16 @@ var slidesWhy = [
 		()=>0,
 		function() {
 			$("mainText").style.bottom = "45%";
+		},
+		()=>0),
+
+	new Slide(`Also, SHARE this presentation with maximum R<sub>0</sub> to raise awareness around you!`,
+		function() {
+			$("mainText").style.bottom = "47%";
+		},
+		()=>0,
+		function() {
+			$("mainText").style.bottom = "47%";
 		},
 		()=>0),
 
