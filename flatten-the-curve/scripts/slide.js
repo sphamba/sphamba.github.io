@@ -102,6 +102,7 @@ function nextSlide() {
 var slidesWhat = [
 	new Slide(`Welcome!<br>In this first chapter, we will see how to simulate the evolution of an epidemic and explain what is <i>the Curve</i> everyone is worried about.`,
 		function () {
+			$("mainText").style.left = "5%";
 			$("mainText").style.bottom = "45%";
 		},
 		()=>0,
@@ -244,7 +245,7 @@ var slidesWhat = [
 			graph2.hide();
 		}),
 	
-	new Slide(`Beware! The graphs here show the <u>actual</u> number of cases. In real life, not all <span class="I">Infected</span> people get tested and recored. Even when they are, it is not immediatly at the moment they became contagious. Therefore, real statistics are <u>delayed</u> and <u>underestimate the numbers</u>.`),
+	new Slide(`Beware! The graphs here show the <u>actual</u> number of cases. In real life, not all <span class="I">Infected</span> people get tested and recorded. Even when they are, it is not immediatly at the moment they became contagious. Therefore, real statistics are <u>delayed</u> and <u>underestimate the numbers</u>.`),
 	
 	new Slide(`The evolution of the number of <span class="I">Infected</span> people follows what is called an <i>exponential growth</i>. It means that <u>the number of <span class="I">new cases</span> per day is proportional to the number of <span class="I">current cases</span></u>. <span class="I">Infection</span> is more likely when there are more <span class="I">Infected</span> people around.`),
 	
@@ -283,6 +284,7 @@ var slidesWhat = [
 var slidesHow = [
 	new Slide(`Let's go back to our graph of current cases per day.`,
 		function() {
+			$("mainText").style.left = "5%";
 			$("mainText").style.bottom = "5%";
 			graph1.move(15, 20, 60, 60);
 			
@@ -677,6 +679,7 @@ var slidesHow = [
 var slidesWhy = [
 	new Slide(`In the previous chapters, you learned what the <span class="I">Infection</span> <i>Curve</i> is and several ways to flatten it. You may be wondering <i>Why</i> this is desirable?`,
 		function() {
+			$("mainText").style.left = "5%";
 			$("mainText").style.bottom = "45%";
 			graph1.move(15, 20, 60, 60);
 			
@@ -980,7 +983,7 @@ var slidesWhy = [
 
 
 playground = [
-	new Slide(``,
+	new Slide(`R<sub>0</sub> = `,
 		function() {
 			moveSliders(70, 0);
 			showSliders();
@@ -1019,7 +1022,7 @@ playground = [
 			
 			simulate();
 			
-			graph1.move(7, 5, 55, 55);
+			graph1.move(5, 5, 55, 55);
 			graph1.update();
 			graph1.plotAll();
 			graph1.show();
@@ -1033,6 +1036,10 @@ playground = [
 			graph3.update();
 			graph3.plotAll();
 			graph3.show();
+			
+			$("mainText").style.left = "-9.3%";
+			$("mainText").style.bottom = "33%";
+			addR0indicator();
 		})
 ];
 
@@ -1056,6 +1063,11 @@ function addR0indicator() {
 		sliders.probInfection.update();
 		updateR0();
 	};
+	
+	sliders.daysInfectious.slider.oninput = function() {
+		sliders.daysInfectious.update();
+		updateR0();
+	};
 }
 
 function removeR0indicator() {
@@ -1065,5 +1077,9 @@ function removeR0indicator() {
 	
 	sliders.probInfection.slider.oninput = function() {
 		sliders.probInfection.update();
+	};
+	
+	sliders.daysInfectious.slider.oninput = function() {
+		sliders.daysInfectious.update();
 	};
 }
