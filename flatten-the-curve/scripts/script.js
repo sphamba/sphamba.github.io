@@ -129,3 +129,14 @@ addEventListener("keydown", function(event) {
 // window.onload = function() {
 // 	$("langSelect").style.opacity = 1;
 // }
+
+
+function requestFullscreen() {
+	if (isMobileDevice()) {
+		$("body").requestFullscreen();
+	}
+}
+
+// document.onfullscreenchange = function() {
+	
+// }

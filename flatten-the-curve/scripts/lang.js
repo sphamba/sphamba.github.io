@@ -18,6 +18,7 @@ function L(text) {
 
 
 function hideLangScreen() {
+	requestFullscreen();
 	updateSliderNames();
 	transitionScreens("langSelect", "titleScreen");
 }

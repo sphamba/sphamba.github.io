@@ -817,7 +817,7 @@ var slidesHow = [
 var slidesWhy = [
 	new Slide(L({
 			en: `In the previous chapters, you learned what the <span class="I">Infection</span> <i>Curve</i> is and several ways to flatten it. You may be wondering <i>Why</i> this is desirable?`,
-			fr: `Dans les chapitres précédents, vous avez appris ce qu'est <i>la Courbe</i> des <span class="I">Infections</span> et plusieurs moyens de l'aplatir. Vous devrez vous demander <i>Pourquoi</i> cela est nécessaire ?`
+			fr: `Dans les chapitres précédents, vous avez appris ce qu'est <i>la Courbe</i> des <span class="I">Infections</span> et plusieurs moyens de l'aplatir. Vous devez vous demander <i>Pourquoi</i> cela est nécessaire ?`
 		}),
 		function() {
 			$("mainText").style.left = "5%";

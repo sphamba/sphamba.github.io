@@ -6,6 +6,13 @@
 	font-style: normal;
 }
 
+html { /*for fullscreen*/
+	background: #600;
+	background: linear-gradient(135deg, #700, #400);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
 
 body {
 	background: #600;
@@ -19,6 +26,7 @@ body {
 	color: white;
 	cursor: default;
 }
+
 
 #screen {
 	position: absolute;
