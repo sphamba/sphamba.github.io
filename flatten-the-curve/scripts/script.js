@@ -138,5 +138,5 @@ function requestFullscreen() {
 }
 
 // document.onfullscreenchange = function() {
-	
+// 	console.log(document.fullscreenElement);
 // }
