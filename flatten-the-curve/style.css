@@ -17,7 +17,7 @@ body {
 	padding: 0;
 	font-family: fira_sans_condensedheavy, sans-serif;
 	color: white;
-	cursor: default
+	cursor: default;
 }
 
 #screen {
@@ -28,16 +28,44 @@ body {
 	transform: translate(-50%, -50%);
 }
 
-#titleScreen, #slide {
+#langSelect, #titleScreen, #slide {
 	width: 100%;
 	height: 100%;
 	text-align: center;
 	transition: opacity 1s;
+	
+	opacity: 0;
+	position: absolute;
+	top: 100%;
 }
 
-#slide {
-	opacity: 0;
-	display: none;
+#langSelect {
+	opacity: 1;
+	top: 0;
+	
+	display: -webkit-flexbox;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Language selection */
+
+.flag {
+	height: 20%;
+	margin: 5%;
+	box-shadow: 0 0 4em rgba(0, 0, 0, 0.5);
+	transition: transform 0.3s
+}
+
+.flag:hover {
+	transform: scale(1.15);
+	cursor: pointer;
 }
 
 /* Title screen */
@@ -55,23 +83,28 @@ body {
 	text-shadow: 0 0 1em rgba(0, 0, 0, 0.7);
 }
 
-#titleWhat, #titleHow, #titleWhy {
+#titleWhat, #titleHow, #titleWhy, #titlePlayground {
 	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 0);
-	width: 30%;
 	background-color: #fff;
 	padding: 2% 0 1.5% 0;
 	border-radius: 200px; /* maxed */
 	color: #400;
-	font-size: 1.5em;
 	font-weight: bold;
-	transition: background-color 0.3s;
+	transition-property: background-color, transform;
+	transition-duration: 0.3s;
 	box-shadow: 0 0 4em rgba(0, 0, 0, 0.5);
+}
+
+#titleWhat, #titleHow, #titleWhy {
+	left: 35%;
+	width: 30%;
+	padding: 2% 0 1.5% 0;
+	font-size: 1.5em;
 }
 
 #titleWhat:hover, #titleHow:hover, #titleWhy:hover, #titlePlayground:hover {
 	background-color: #edd;
+	transform: scale(1.05);
 	cursor: pointer;
 }
 
@@ -97,23 +130,16 @@ body {
 
 #titleMark {
 	position: absolute;
-	bottom: 1%;
+	bottom: 3.5%;
 	left: 1.5%;
 	font-size: 0.8em;
 }
 
 #titlePlayground {
-	position: absolute;
 	bottom: 2%;
 	right: 1%;
 	width: 20%;
-	background-color: #fff;
-	color: #400;
-	font-weight: bold;
 	padding: 1% 0;
-	border-radius: 200px; /* maxed */
-	transition: background-color 0.3s;
-	box-shadow: 0 0 4em rgba(0, 0, 0, 0.5);
 }
 
 /* Slide */

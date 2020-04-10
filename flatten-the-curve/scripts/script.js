@@ -12,10 +12,7 @@ function resize() {
 	$("screen").style.fontSize = 0.025 * screenWidth + "px";
 	
 	// canvases
-	let temp = $("slide").style.display;
-	$("slide").style.display = "block";
 	updateDiagramCanvasSize();
-	$("slide").style.display = temp;
 	if (!diagram) diagram = new Diagram();
 	diagram.draw();
 	
@@ -39,19 +36,18 @@ function transitionScreens(s1, s2) {
 	
 	// hide s1
 	$(s1).style.opacity = 0;
-	$(s2).style.display = "block";
+	$(s2).style.top = "0";
 	
-	$(s1).ontransitionend = function() {
+	setTimeout(function() { // $(s1).ontransitionend fires too quickly
 		// show s2
-		$(s1).style.display = "none";
-		$(s1).ontransitionend = null;
+		$(s1).style.top = "100%";
 		$(s2).style.opacity = 1;
 		
 		$(s2).ontransitionend = function() {
 			transitioningScreen = false;
 			$(s2).ontransitionend = null;
 		}
-	};
+	}, 1000);
 }
 
 function showSlides(slides) {
@@ -78,6 +74,7 @@ function showSlides(slides) {
 
 function showTitleScreen() {
 	if (transitioningScreen || transitioningSlide) return;
+	removeR0indicator();
 	transitionScreens("slide", "titleScreen");
 }
 
@@ -114,16 +111,21 @@ addEventListener("keydown", function(event) {
 	
 	switch (event.keyCode) {
 		case 27: // ESC
-			if ($("slide").style.display === "block") showTitleScreen();
+			if ($("slide").style.opacity === "1") showTitleScreen();
 			break;
 			
 		case 37: // feft arrow
-			if ($("slide").style.display === "block") previousSlide();
+			if ($("previous").style.display === "block") previousSlide();
 			break;
 		
 		case 32: // spacebar
 		case 39: // right arrow
-			if ($("slide").style.display === "block") nextSlide();
+			if ($("next").style.display === "block") nextSlide();
 			break;
 	}
 });
+
+
+// window.onload = function() {
+// 	$("langSelect").style.opacity = 1;
+// }

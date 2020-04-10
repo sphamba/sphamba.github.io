@@ -10,9 +10,10 @@ class Slider {
 		this.container = document.createElement("div");
 		this.container.className = "sliderContainer";
 		
-		let domName = document.createElement("span");
-		domName.className = "sliderName";
-		domName.innerHTML = name;
+		this.name = name;
+		this.domName = document.createElement("span");
+		this.domName.className = "sliderName";
+		this.domName.innerHTML = this.name;
 		
 		this.slider = document.createElement("input");
 		this.slider.className = "slider";
@@ -29,7 +30,7 @@ class Slider {
 		
 		this.update();
 		
-		this.container.appendChild(domName);
+		this.container.appendChild(this.domName);
 		this.container.appendChild(this.slider);
 		this.container.appendChild(this.display);
 		$("sliders").appendChild(this.container);
@@ -66,6 +67,11 @@ class Slider {
 			graph3.update();
 			graph3.plotAll();
 		}
+	}
+	
+	
+	updateName() {
+		this.domName.innerHTML = this.name;
 	}
 	
 	
@@ -107,15 +113,15 @@ function finerPercentage(x) {
 
 function daysMonths(x, neverWord) {
 	return !isFinite(x) ? neverWord :
-		(x >= 384) ? Math.round(10 * x / 365) / 10 + " years" :
-		(x >= 350) ? 1 + " year" :
-		(x > 61) ? Math.round(12 * x / 365) + " months" :
-		(x > 1) ? x + " days" : x + " day";
+		(x >= 384) ? Math.round(10 * x / 365) / 10 + " " + L({en: "years", fr: "ans"}) :
+		(x >= 350) ? 1 + " " + L({en: "year", fr: "an"}) :
+		(x > 61) ? Math.round(12 * x / 365) + " " + L({en: "months", fr: "mois"}) :
+		(x > 1) ? x + " " + L({en: "days", fr: "jours"}) : x + " " + L({en: "day", fr: "jour"});
 }
 
 
 var sliders = {
-	timeEnd: new Slider("timeEnd", "Simulation duration",
+	timeEnd: new Slider("timeEnd", L({en: "Simulation duration", fr: "Durée simulation"}),
 		7, 730, 1, 182,
 		(x)=>daysMonths(x),
 		function(x) { // had to put this somewhere...
@@ -125,79 +131,86 @@ var sliders = {
 			return x;
 		}),
 	
-	initialContamination: new Slider("initialContamination", "Initial contamination",
+	initialContamination: new Slider("initialContamination", L({en: "Initial contamination", fr: "Contamination initiale"}),
 		-6, 0, 0.01, -4,
 		finerPercentage,
 		(x)=>Math.pow(10, x)),
 	
-	contactsPerDay: new Slider("contactsPerDay", "Contacts per day",
+	contactsPerDay: new Slider("contactsPerDay", L({en: "Contacts per day", fr: "Contacts par jour"}),
 		0, 50, 0.1, 10),
 	
-	probInfection: new Slider("probInfection", "Infection probability",
+	probInfection: new Slider("probInfection", L({en: "Infection probability", fr: "Probabilité infection"}),
 		0, 1, 0.001, 0.2,
 		finePercentage,
 		(x)=>x*x),
 	
-	daysBeforeHospital: new Slider("daysBeforeHospital", "Days to hospital",
+	daysBeforeHospital: new Slider("daysBeforeHospital", L({en: "Days to hospital", fr: "Jours avant hôpital"}),
 		0.1, 7.1, 0.1, 4,
-		(x)=>daysMonths(x, "never"),
+		(x)=>daysMonths(x, L({en: "never", fr: "jamais"})),
 		function (x) {
 			return (x == 7.1) ? Infinity : x;
 		}),
 	
-	daysInfectious: new Slider("daysInfectious", "Infection duration",
+	daysInfectious: new Slider("daysInfectious", L({en: "Infection duration", fr: "Durée infection"}),
 		1, 29, 0.1, 10,
-		(x)=>daysMonths(x, "permanent"),
+		(x)=>daysMonths(x, L({en: "permanent", fr: "permanente"})),
 		function(x) {
 			return (x == 29) ? Infinity : x;
 		}),
 	
-	hospitalCapacity: new Slider("hospitalCapacity", "Hospital capacity",
+	hospitalCapacity: new Slider("hospitalCapacity", L({en: "Hospital capacity", fr: "Capacité hôpitaux"}),
 		0, 1, 0.001, 0.224,
 		finePercentage,
 		(x)=>x*x),
 	
-	daysImmunity: new Slider("daysImmunity", "Immunity duration",
+	daysImmunity: new Slider("daysImmunity", L({en: "Immunity duration", fr: "Durée immunité"}),
 		1, 366, 0.1, 62,
-		(x)=>daysMonths(x, "permanent"),
+		(x)=>daysMonths(x, L({en: "permanent", fr: "permanente"})),
 		function(x) {
 			return (x == 366) ? Infinity : x;
 		}),
 	
-	isolationStart: new Slider("isolationStart", "Isolation start",
+	isolationStart: new Slider("isolationStart", L({en: "Isolation start", fr: "Début confinement"}),
 		0, 366, 1, 366,
-		(x)=>daysMonths(x, "never"),
+		(x)=>daysMonths(x, L({en: "never", fr: "jamais"})),
 		function(x) {
 			return (x == 366) ? Infinity : x;
 		}),
 	
-	mortality: new Slider("mortality", "Lethality",
+	mortality: new Slider("mortality", L({en: "Lethality", fr: "Létalité"}),
 		0, 1, 0.001, 0.316,
 		finePercentage,
 		(x)=>x*x),
 	
-	isolationDuration: new Slider("isolationDuration", "Isolation duration",
+	isolationDuration: new Slider("isolationDuration", L({en: "Isolation duration", fr: "Durée confinement"}),
 		1, 366, 1, 366,
-		(x)=>daysMonths(x, "forever"),
+		(x)=>daysMonths(x, L({en: "forever", fr: "toujours"})),
 		function(x) {
 			return (x == 366) ? Infinity : x;
 		}),
 	
-	mortalityHospital: new Slider("mortalityHospital", "Lethality in hospital",
+	mortalityHospital: new Slider("mortalityHospital", L({en: "Lethality in hospital", fr: "Létalité en hôpital"}),
 		0, 1, 0.001, 0.141,
 		finePercentage,
 		(x)=>x*x),
 	
-	contactsPerDayIsolation: new Slider("contactsPerDayIsolation", "Contacts/day isolation",
+	contactsPerDayIsolation: new Slider("contactsPerDayIsolation", L({en: "Contacts/day isolation", fr: "Contacts/jour confinmt"}),
 		0, 10, 0.1, 3),
 	
-	vaccineDay: new Slider("vaccineDay", "Vaccination day",
+	vaccineDay: new Slider("vaccineDay", L({en: "Vaccination day", fr: "Jour vaccination"}),
 		0, 731, 1, 731,
-		(x)=>daysMonths(x, "never"),
+		(x)=>daysMonths(x, L({en: "never", fr: "jamais"})),
 		function(x) {
 			return (x == 731) ? Infinity : x;
 		}),
 };
+
+
+function updateSliderNames() {
+	for (i in sliders) {
+		sliders[i].updateName();
+	}
+}
 
 
 function showSliders() {

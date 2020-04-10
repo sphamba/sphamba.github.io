@@ -109,12 +109,12 @@ function simulate() {
 			err = h * err.reduce((max, curr) => Math.max(max, Math.abs(curr)));
 			
 			// estimate safe step size
-			// if (err > tol) { // *cumulated* error has to be < tol, but adds a lot of points...
-			// 	// h_safe = h * Math.pow(tol / err, 1 / (err_order - 1));
-			// 	h_safe = h * tol / err; // because err_order = 2
-			// } else {
+			// if (err > tol) {
 				// h_safe = h * Math.pow(tol / err, 1 / err_order);
 				h_safe = h * Math.sqrt(tol / err); // because err_order = 2
+			// } else { // *cumulated* error has to be < tol, but adds a lot of points...
+			// 	// h_safe = h * Math.pow(tol / err, 1 / (err_order - 1));
+			// 	h_safe = h * tol / err; // because err_order = 2
 			// }
 			if (h_safe < h_min) h_safe = h_min;
 			

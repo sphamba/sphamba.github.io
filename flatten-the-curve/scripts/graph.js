@@ -59,7 +59,7 @@ class Graph {
 		
 		// xlabel
 		this.ctx.fillText(
-			useMonthsTicks(timeEnd) ? "months" : "days",
+			useMonthsTicks(timeEnd) ? L({en: "months", fr: "mois"}) : L({en: "days", fr: "jours"}),
 			this.left + this.width / 2, this.dom.height * 0.96);
 		
 		// ylabel
@@ -173,7 +173,7 @@ class Graph {
 			this.ctx.textBaseline = "top";
 			this.ctx.save();
 			this.ctx.rotate(-Math.PI / 2);
-			this.ctx.fillText("isolation",
+			this.ctx.fillText(L({en: "isolation", fr: "confinement"}),
 				-this.top + -this.height / 2,
 				x0 + 0.01 * this.width);
 			this.ctx.restore();
@@ -200,7 +200,7 @@ class Graph {
 			this.ctx.textBaseline = "top";
 			this.ctx.save();
 			this.ctx.rotate(-Math.PI / 2);
-			this.ctx.fillText("vaccination",
+			this.ctx.fillText(L({fr: "vaccination", fr: "vaccination"}),
 				-this.top + -this.height / 2,
 				x0 + 0.01 * this.width);
 			this.ctx.restore();
@@ -303,7 +303,7 @@ class GraphFilled extends Graph {
 			this.ctx.font = this.textFontSize + "px " + FONT_NAME;
 			this.ctx.textAlign = "center";
 			this.ctx.textBaseline = "bottom";
-			this.ctx.fillText("hospital capacity",
+			this.ctx.fillText(L({en: "hospital capacity", fr: "capacité hôpitaux"}),
 				this.left + this.width / 2,
 				this.bottom - (hospitalCapacity + 0.01) * this.height);
 		}
@@ -318,7 +318,7 @@ class GraphFilled extends Graph {
 		// write D
 		let D = D_tab[D_tab.length - 1];
 		if (D < THRESH_MIN) D = 0;
-		this.ctx.fillText(parseFloat((100 * D).toPrecision(2)) + "% Deaths",
+		this.ctx.fillText(parseFloat((100 * D).toPrecision(2)) + "% " + L({en: "Deaths", fr: "Décédés"}),
 			this.right - 0.01 * this.width,
 			this.top + clamp(
 				D / 2 * this.height,
@@ -328,7 +328,7 @@ class GraphFilled extends Graph {
 		// write R
 		let R = R_tab[R_tab.length - 1];
 		if (R < THRESH_MIN) R = 0;
-		this.ctx.fillText(parseFloat((100 * R).toPrecision(2)) + "% Recovered",
+		this.ctx.fillText(parseFloat((100 * R).toPrecision(2)) + "% " + L({en: "Recovered", fr: "Rétablis"}),
 			this.right - 0.01 * this.width,
 			this.top + clamp(
 				(D + R / 2) * this.height,
@@ -338,7 +338,7 @@ class GraphFilled extends Graph {
 		// write S
 		let S = S_tab[S_tab.length - 1];
 		if (S < THRESH_MIN) S = 0;
-		this.ctx.fillText(parseFloat((100 * S).toPrecision(2)) + "% Susceptible",
+		this.ctx.fillText(parseFloat((100 * S).toPrecision(2)) + "% " + L({en: "Susceptible", fr: "Susceptibles"}),
 			this.right - 0.01 * this.width,
 			this.top + clamp(
 				(D + R + S / 2) * this.height,
@@ -348,7 +348,7 @@ class GraphFilled extends Graph {
 		// write I
 		let I = I_tab[I_tab.length - 1];
 		if (I < THRESH_MIN) I = 0;
-		this.ctx.fillText(parseFloat((100 * I).toPrecision(2)) + "% Infected",
+		this.ctx.fillText(parseFloat((100 * I).toPrecision(2)) + "% " + L({en: "Infected", fr: "Infectés"}),
 			this.right - 0.01 * this.width,
 			this.top + clamp(
 				(D + R + S + I / 2) * this.height,
@@ -424,19 +424,19 @@ var graph1 = new GraphFilled("graph1", function() {
 	this.addPlot(i => N - D_tab[i] - R_tab[i], S_COLOR); // S
 	this.addPlot(i => I_tab[i] + H_tab[i],     I_COLOR); // I
 	this.addPlot(i => H_tab[i],                H_COLOR); // H
-}, "current cases");
+}, L({en: "current cases", fr: "cas présents"}));
 
 var graph2 = new GraphCurves("graph2", function() {
 	this.addPlot(i => nI_tab[i], I_COLOR);
 	this.addPlot(i => nR_tab[i], R_COLOR);
 	this.addPlot(i => nD_tab[i], D_COLOR);
-}, "new cases per day");
+}, L({en: "new cases per day", fr: "nouveaux cas par jour"}));
 
 var graph3 = new GraphCurves("graph3", function() {
 	this.addPlot(i => sI_tab[i], I_COLOR);
 	this.addPlot(i => sR_tab[i], R_COLOR);
 	this.addPlot(i => sD_tab[i], D_COLOR);
-}, "total cases");
+}, L({en: "total cases", fr: "total des cas"}));
 
 
 
