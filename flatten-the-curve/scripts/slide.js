@@ -166,7 +166,7 @@ var slidesWhat = [
 	
 	new Slide(L({
 			en: `And <span class="I">Infected</span> people <span class="R"><i>Recover</i> (R)</span>, acquiring an immunity to the disease.`,
-			fr: `Et les personnes <span class="I">Infectées</span> se <span class="R"><i>Rétablissent</i> (R)</span> et deviennent immunisées à la maladie.`
+			fr: `Et les personnes <span class="I">Infectées</span> se <span class="R"><i>Rétablissent</i> (R)</span> et deviennent immunisées contre la maladie.`
 		}),
 		function() {
 			diagram.show("R");
@@ -255,7 +255,7 @@ var slidesWhat = [
 	
 	new Slide(L({
 			en: `On the far right of the graph, the values for the final shown day are indicated.`,
-			fr: `À l'extrême droite du graphique, les valeurs pour le dernier jour affiché sont indiquées.`
+			fr: `À l'extrême droite du graphique sont indiquées les valeurs pour le dernier jour affiché.`
 		}),
 		()=>0,
 		function () {
@@ -283,7 +283,7 @@ var slidesWhat = [
 	
 	new Slide(L({
 			en: `Beware! The graphs here show the <u>actual</u> number of cases. In real life, not all <span class="I">Infected</span> people get tested and recorded. Even when they are, it is not immediatly at the moment they became contagious. Therefore, real statistics are <u>delayed</u> and <u>underestimate the numbers</u>.`,
-			fr: `Prenez garde ! Les graphiques montrés ici donnent le <u>véritable</u> nombre de cas. Dans la vie réelle, les personnes <span class="I">Infectées</span> ne sont pas toutes repérées et enregistrées, et les tests ne sont pas immédiats dès lors qu'un cas contagieux apparaît. Les statistiques réelles sont donc <u>en retard</u> et <u>sous-estiment</u> les nombres.`
+			fr: `Prenez garde ! Les graphiques montrés ici donnent le <u>véritable</u> nombre de cas. Dans la vie réelle, les personnes <span class="I">Infectées</span> ne sont pas toutes repérées et enregistrées. Même lorsqu'elles le sont, c'est en général quelques jours après qu'elles soient devenues contagieuses. Les statistiques réelles sont donc <u>en retard</u> et <u>sous-estiment</u> les nombres.`
 		})),
 	
 	new Slide(L({
@@ -1146,7 +1146,7 @@ var slidesWhy = [
 
 	new Slide(L({
 			en: `Also, SHARE this presentation with maximum R<sub>0</sub> to raise awareness around you!`,
-			fr: `Et aussi, PARTAGEZ cette présentation avec un R<sub>0</sub> maximum pour sensibiliser votre entourage !`
+			fr: `Et aussi, PARTAGEZ cette présentation avec un R<sub>0</sub> maximal pour sensibiliser votre entourage !`
 		}),
 		function() {
 			$("mainText").style.bottom = L({en: "47%", fr: "44%"});
