@@ -42,6 +42,7 @@ function transitionSlides(s1, s2, forward=true) {
 	
 	$("mainText").ontransitionend = function() {
 		// show s2 elements
+		updateSlideNumber();
 		forward ? s2.showForward() : s2.showBackwards();
 		
 		$("mainText").ontransitionend = function() {
@@ -58,6 +59,11 @@ function transitionForward(s1, s2) {
 
 function transitionBackwards(s1, s2) {
 	transitionSlides(s1, s2, false);
+}
+
+
+function updateSlideNumber() {
+	$("slideNumber").innerHTML = currentSlideId + 1 + "/" + currentSlides.length;
 }
 
 
@@ -330,7 +336,7 @@ var slidesWhat = [
 	
 	new Slide(L({
 			en: `Do you see the <span class="I">red bell-shaped curve</span> on the left graph of current cases? This is <i>the Curve</i> we have to flatten! Take a look at the next chapters to learn <i>How</i> to do it and <i>Why</i> we have to.`,
-			fr: `Voyez-vous la <span class="I">courbe rouge en cloche</span> sur le graphique de gauche des cas présents ? Il s'agit de <i>la Courbe</i> que nous devons aplatir ! Explorez les prochains chapitres pour apprendre <i>Comment</i> et <i>Pourquoi</i> nous devont faire cela.`
+			fr: `Voyez-vous la <span class="I">courbe rouge en cloche</span> sur le graphique de gauche des cas présents ? Il s'agit de <i>la Courbe</i> que nous devons aplatir ! Explorez les prochains chapitres pour apprendre <i>Comment</i> et <i>Pourquoi</i> nous devons faire cela.`
 		}))
 ];
 

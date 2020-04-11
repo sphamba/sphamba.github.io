@@ -66,6 +66,7 @@ function showSlides(slides) {
 	graph3.hide();
 	hideSliders();
 	
+	updateSlideNumber();
 	s.showForward();
 	s.display();
 	
@@ -82,24 +83,28 @@ function showTitleScreen() {
 $("titleWhat").onclick = function() {
 	$("previous").style.display = "block";
 	$("next").style.display = "block";
+	$("slideNumber").style.display = "block";
 	showSlides(slidesWhat);
 };
 
 $("titleHow").onclick = function() {
 	$("previous").style.display = "block";
 	$("next").style.display = "block";
+	$("slideNumber").style.display = "block";
 	showSlides(slidesHow);
 };
 
 $("titleWhy").onclick = function() {
 	$("previous").style.display = "block";
 	$("next").style.display = "block";
+	$("slideNumber").style.display = "block";
 	showSlides(slidesWhy);
 };
 
 $("titlePlayground").onclick = function() {
 	$("previous").style.display = "none";
 	$("next").style.display = "none";
+	$("slideNumber").style.display = "none";
 	showSlides(playground);
 };
 
@@ -126,9 +131,10 @@ addEventListener("keydown", function(event) {
 });
 
 
-// window.onload = function() {
-// 	$("langSelect").style.opacity = 1;
-// }
+window.onload = function() {
+	$("langSelect").style.opacity = 1;
+	setTimeout(function () { scrollTo(0, 0); }, 1000);
+}
 
 
 function requestFullscreen() {

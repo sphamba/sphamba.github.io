@@ -30,7 +30,6 @@ body {
 
 #screen {
 	position: absolute;
-	/*border: 1px solid #faa;*/
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -48,7 +47,7 @@ body {
 }
 
 #langSelect {
-	opacity: 1;
+	/*opacity: 1;*/
 	top: 0;
 	
 	display: -webkit-flexbox;
@@ -74,6 +73,13 @@ body {
 .flag:hover {
 	transform: scale(1.15);
 	cursor: pointer;
+}
+
+#noteBrowser {
+	position: absolute;
+	left: 0;
+	bottom: 5%;
+	width: 100%;
 }
 
 /* Title screen */
@@ -208,6 +214,12 @@ body {
 	cursor: pointer;
 }
 
+#slideNumber {
+	position: absolute;
+	top: 1%;
+	right: 0.8%;
+}
+
 /* content */
 
 #mainText {
@@ -257,8 +269,6 @@ body {
 	transition-property: opacity, width, height, top, left;
 	transition-duration: 0.5s;
 	opacity: 0;
-	
-	/*border: 1px solid white*/
 }
 
 
@@ -271,7 +281,6 @@ body {
 	left: 0;
 	width: 100%;
 	height: 30%;
-	/*background-color: white;*/
 	transition-property: top, left;
 	transition-duration: 0.3s;
 }
@@ -281,8 +290,8 @@ body {
 	display: inline-block;
 	opacity: 0;
 	width: 49%;
-	height: 0;
-	padding-bottom: 2%;
+	height: 10%;
+	/*padding-bottom: 2%;*/
 	font-size: 0.75em;
 	transition-property: opacity;
 	transition-duration: 0.2s;
@@ -306,9 +315,10 @@ body {
 	-webkit-appearance: none;
 	appearance: none;
 	outline: none;
-	height: 5%;
-	margin-top: 2.2%;
-	background-color: #a44;
+	background: transparent;
+	height: 100%;
+	margin-top: -1%;
+	/*background-color: #a44;*/
 }
 
 .slider::-webkit-slider-thumb { /*Webkit*/
@@ -319,15 +329,44 @@ body {
 	background: #fff;
 	border: none;
 	cursor: pointer;
+	margin-top: -6px;
+}
+
+.slider::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 1px;
+	background-color: #a44;
+	margin-top: 2%;
 }
 
 .slider::-moz-range-thumb { /*Firefox*/
-	width: 8%;
-	height: 1580%;
+	width: 12px;
+	height: 12px;
 	border-radius: 50%;
 	background-color: #fff;
 	border: none;
 	cursor: pointer;
+}
+
+.slider::-moz-range-track {
+	width: 100%;
+	height: 1px;
+	background-color: #a44;
+}
+
+.slider::-ms-thumb { /*IE*/
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background-color: #fff;
+	border: none;
+	cursor: pointer;
+}
+
+.slider::-ms-track { /*IE*/
+	width: 100%;
+	height: 1px;
+	background-color: #a44;
 }
 
 .slider:focus {
