@@ -36,8 +36,11 @@ var sR_tab = null;
 var sD_tab = null;
 
 var tol = 1e-5; // precision for integration
+var safetyFactor = 0.95;
 var h_max = 20;
 var h_min = 5e-2;
+
+var derivEvalCounter = 0; // to evaluate performance
 
 
 function simulate() {
@@ -64,6 +67,7 @@ function simulate() {
 	
 	let t = 0;
 	let h = 1;
+	derivEvalCounter = 0;
 	
 	let vaccine_given = false;
 	
@@ -110,11 +114,11 @@ function simulate() {
 			
 			// estimate safe step size
 			// if (err > tol) {
-				// h_safe = h * Math.pow(tol / err, 1 / err_order);
-				h_safe = h * Math.sqrt(tol / err); // because err_order = 2
+				// h_safe = safetyFactor * h * Math.pow(tol / err, 1 / err_order);
+				h_safe = safetyFactor * h * Math.sqrt(tol / err); // because err_order = 2
 			// } else { // *cumulated* error has to be < tol, but adds a lot of points...
-			// 	// h_safe = h * Math.pow(tol / err, 1 / (err_order - 1));
-			// 	h_safe = h * tol / err; // because err_order = 2
+			// 	// h_safe = safetyFactor * h * Math.pow(tol / err, 1 / (err_order - 1));
+			// 	h_safe = safetyFactor * h * tol / err; // because err_order = 2
 			// }
 			if (h_safe < h_min) h_safe = h_min;
 			
@@ -167,10 +171,11 @@ function simulate() {
 	
 	sD_tab = D_tab;
 	
-	// console.log(`${t_tab.length} points generated`);
+	// console.log(`${t_tab.length} points, ${derivEvalCounter} derivative evaluations.`);
 }
 
 function derivative(t, y) {
+	derivEvalCounter ++;
 	let [S, I, H, R, D] = y;
 	
 	let S_to_I = getContactsPerDay(t) * probInfection * I / N * S;
