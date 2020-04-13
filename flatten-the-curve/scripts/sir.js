@@ -36,7 +36,7 @@ var sR_tab = null;
 var sD_tab = null;
 
 var tol = 1e-5; // precision for integration
-var safetyFactor = 0.95;
+var safetyFactor = 0.9;
 var h_max = 20;
 var h_min = 5e-2;
 
@@ -68,7 +68,7 @@ function simulate() {
 	let t = 0;
 	let h = 1;
 	derivEvalCounter = 0;
-	let k1 = derivative(t,  [S, I, H, R, D]); // "first same as last", k4 = k1
+	let k1 = derivative(t, [S, I, H, R, D]); // "first same as last", k4 = k1
 	
 	let vaccine_given = false;
 	
@@ -100,7 +100,7 @@ function simulate() {
 			if (h_safe < h_min) h_safe = h_min;
 			
 			// adjust h if too big and recompute the k
-			if (h > h_safe) {
+			if (h > h_safe / safetyFactor) {
 				h = h_safe;
 			} else {
 				break;
@@ -119,7 +119,10 @@ function simulate() {
 			S = 0;
 			vaccine_given = true;
 		}
-		if (I < 0) I = 0;
+		if (I < 0) {
+			I = 0;
+			k1 = derivative(t + h, [S, I, H, R, D]);
+		}
 		D = N - S - I - H - R;
 		t += h;
 		
