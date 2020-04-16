@@ -65,7 +65,7 @@ body {
 
 .flag {
 	height: 20%;
-	margin: 5%;
+	margin: 3%;
 	box-shadow: 0 0 4em rgba(0, 0, 0, 0.5);
 	transition: transform 0.3s
 }

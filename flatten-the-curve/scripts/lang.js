@@ -43,13 +43,14 @@ $("langFR").onclick = function() {
 }
 
 
-// $("langES").onclick = function() {
-// 	lang = "es";
+$("langES").onclick = function() {
+	lang = "es";
 	
-// 	$("titleWhat").innerHTML = "1 - ?";
-// 	$("titleHow"). innerHTML = "2 - ?";
-// 	$("titleWhy"). innerHTML = "3 - ?";
-// 	$("titlePlayground"). innerHTML = "?";
+	// $("title").    innerHTML = "APLANAR LA CURVA";
+	$("titleWhat").innerHTML = "1 - ¿QUÉ?";
+	$("titleHow"). innerHTML = "2 - ¿CÓMO?";
+	$("titleWhy"). innerHTML = "3 - ¿PORQUÉ?";
+	$("titlePlayground"). innerHTML = "Área de prueba";
 	
-// 	hideLangScreen();
-// }
+	hideLangScreen();
+}
