@@ -200,7 +200,7 @@ class Graph {
 			this.ctx.textBaseline = "top";
 			this.ctx.save();
 			this.ctx.rotate(-Math.PI / 2);
-			this.ctx.fillText(L({fr: "vaccination", fr: "vaccination", es: "vacunación"}),
+			this.ctx.fillText(L({en: "vaccination", fr: "vaccination", es: "vacunación"}),
 				-this.top + -this.height / 2,
 				x0 + 0.01 * this.width);
 			this.ctx.restore();
