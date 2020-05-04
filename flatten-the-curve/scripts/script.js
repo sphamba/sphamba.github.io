@@ -38,15 +38,14 @@ function transitionScreens(s1, s2) {
 	$(s1).style.opacity = 0;
 	$(s2).style.top = "0";
 	
-	setTimeout(function() { // $(s1).ontransitionend fires too quickly
+	setTimeout(function() {
 		// show s2
 		$(s1).style.top = "100%";
 		$(s2).style.opacity = 1;
 		
-		$(s2).ontransitionend = function() {
+		setTimeout(function() {
 			transitioningScreen = false;
-			$(s2).ontransitionend = null;
-		}
+		}, 1000);
 	}, 1000);
 }
 

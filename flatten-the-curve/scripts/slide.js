@@ -1,4 +1,4 @@
-const TRANSITION_DURATION = 0.5;
+const TRANSITION_DURATION = 0.6;
 
 
 class Slide {
@@ -40,17 +40,16 @@ function transitionSlides(s1, s2, forward=true) {
 	transitioningSlide = true;
 	forward ? s1.hideForward() : s1.hideBackwards();
 	
-	$("mainText").ontransitionend = function() {
+	setTimeout(function() {
 		// show s2 elements
 		updateSlideNumber();
 		forward ? s2.showForward() : s2.showBackwards();
 		
-		$("mainText").ontransitionend = function() {
-			$("mainText").ontransitionend = null;
+		setTimeout(function() {
 			transitioningSlide = false;
 			s2.display();
-		};
-	};
+		}, TRANSITION_DURATION * 1000);
+	}, TRANSITION_DURATION * 1000);
 }
 
 function transitionForward(s1, s2) {

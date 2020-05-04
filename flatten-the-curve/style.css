@@ -8,7 +8,8 @@
 
 html { /*for fullscreen*/
 	background: #600;
-	background: linear-gradient(135deg, #700, #400);
+	background: -o-linear-gradient(315deg, #700, #400);
+	background:    linear-gradient(135deg, #700, #400);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 }
@@ -16,7 +17,8 @@ html { /*for fullscreen*/
 
 body {
 	background: #600;
-	background: linear-gradient(135deg, #700, #400);
+	background: -o-linear-gradient(315deg, #700, #400);
+	background:    linear-gradient(135deg, #700, #400);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	overflow: hidden;
@@ -32,14 +34,18 @@ body {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	    -ms-transform: translate(-50%, -50%);
+	        transform: translate(-50%, -50%);
 }
 
 #langSelect, #titleScreen, #slide {
 	width: 100%;
 	height: 100%;
 	text-align: center;
-	transition: opacity 1s;
+	-webkit-transition: opacity 1s;
+	-o-transition:      opacity 1s;
+	transition:         opacity 1s;
 	
 	opacity: 0;
 	position: absolute;
@@ -50,14 +56,14 @@ body {
 	/*opacity: 1;*/
 	top: 0;
 	
-	display: -webkit-flexbox;
 	display: -ms-flexbox;
-	display: -webkit-flex;
+	display: -webkit-box;
 	display: flex;
-	-webkit-flex-align: center;
+	-webkit-box-align: center;
 	-ms-flex-align: center;
-	-webkit-align-items: center;
 	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
 }
 
@@ -66,12 +72,17 @@ body {
 .flag {
 	height: 20%;
 	margin: 3%;
-	box-shadow: 0 0 4em rgba(0, 0, 0, 0.5);
-	transition: transform 0.3s
+	-webkit-box-shadow: 0 0 4em rgba(0, 0, 0, 0.5);
+	        box-shadow: 0 0 4em rgba(0, 0, 0, 0.5);
+	-webkit-transition: -webkit-transform 0.3s;
+	     -o-transition:         transform 0.3s;
+	        transition:         transform 0.3s;
 }
 
 .flag:hover {
-	transform: scale(1.15);
+	-webkit-transform: scale(1.15);
+	    -ms-transform: scale(1.15);
+	        transform: scale(1.15);
 	cursor: pointer;
 }
 
@@ -89,7 +100,9 @@ body {
 	top: 10%;
 	left: 50%;
 	width: 100%;
-	transform: translate(-50%, 0);
+	-webkit-transform: translate(-50%, 0);
+	    -ms-transform: translate(-50%, 0);
+	        transform: translate(-50%, 0);
 	opacity: 1;
 	display: block;
 	font-size: 3em;
@@ -104,9 +117,14 @@ body {
 	border-radius: 200px; /* maxed */
 	color: #400;
 	font-weight: bold;
-	transition-property: background-color, transform;
-	transition-duration: 0.3s;
-	box-shadow: 0 0 4em rgba(0, 0, 0, 0.5);
+	-webkit-transition-property: background-color, -webkit-transform;
+	     -o-transition-property: background-color,         transform;
+	        transition-property: background-color,         transform;
+	-webkit-transition-duration: 0.3s;
+	     -o-transition-duration: 0.3s;
+	        transition-duration: 0.3s;
+	-webkit-box-shadow: 0 0 4em rgba(0, 0, 0, 0.5);
+	        box-shadow: 0 0 4em rgba(0, 0, 0, 0.5);
 }
 
 #titleWhat, #titleHow, #titleWhy {
@@ -118,7 +136,9 @@ body {
 
 #titleWhat:hover, #titleHow:hover, #titleWhy:hover, #titlePlayground:hover {
 	background-color: #edd;
-	transform: scale(1.05);
+	-webkit-transform: scale(1.05);
+	    -ms-transform: scale(1.05);
+	        transform: scale(1.05);
 	cursor: pointer;
 }
 
@@ -134,7 +154,9 @@ body {
 	position: absolute;
 	top: 63%;
 	left: 50.5%;
-	transform: translate(-50%, 0);
+	-webkit-transform: translate(-50%, 0);
+	    -ms-transform: translate(-50%, 0);
+	        transform: translate(-50%, 0);
 	font-size: 1.2em
 }
 
@@ -159,7 +181,9 @@ body {
 /* Slide */
 
 #home, #previous, #next {
-	transition: transform 0.3s;
+	-webkit-transition: -webkit-transform 0.3s;
+	     -o-transition:         transform 0.3s;
+	        transition:         transform 0.3s;
 }
 
 /* buttons */
@@ -196,21 +220,29 @@ body {
 	background-color: black;
 	background: url(images/arrow.svg);
 	background-size: 100% 100%;
-	transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	    -ms-transform: rotate(180deg);
+	        transform: rotate(180deg);
 }
 
 #previous:hover {
-	transform: scale(1.15);
+	-webkit-transform: scale(1.15);
+	    -ms-transform: scale(1.15);
+	        transform: scale(1.15);
 	cursor: pointer;
 }
 
 #next:hover {
-	transform: rotate(180deg) scale(1.15);
+	-webkit-transform: rotate(180deg) scale(1.15);
+	    -ms-transform: rotate(180deg) scale(1.15);
+	        transform: rotate(180deg) scale(1.15);
 	cursor: pointer;
 }
 
 #home:hover {
-	transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	    -ms-transform: rotate(-90deg);
+	        transform: rotate(-90deg);
 	cursor: pointer;
 }
 
@@ -228,7 +260,9 @@ body {
 	left: 5%;
 	width: 90%;
 	font-size: 1em;
-	transition: opacity 0.5s;
+	-webkit-transition: opacity 0.5s;
+	     -o-transition: opacity 0.5s;
+	        transition: opacity 0.5s;
 }
 
 #mainText .S {
@@ -257,7 +291,9 @@ body {
 	left: 5%;
 	width: 90%;
 	height: 75%;
-	transition: opacity 0.5s;
+	-webkit-transition: opacity 0.5s;
+	     -o-transition: opacity 0.5s;
+	        transition: opacity 0.5s;
 	/*background-color: white;*/
 	opacity: 0;
 }
@@ -266,8 +302,12 @@ body {
 	position: absolute;
 	top: 0;
 	left: 5%;
-	transition-property: opacity, width, height, top, left;
-	transition-duration: 0.5s;
+	-webkit-transition-property: opacity, width, height, top, left;
+	     -o-transition-property: opacity, width, height, top, left;
+	        transition-property: opacity, width, height, top, left;
+	-webkit-transition-duration: 0.5s;
+	     -o-transition-duration: 0.5s;
+	        transition-duration: 0.5s;
 	opacity: 0;
 }
 
@@ -281,8 +321,12 @@ body {
 	left: 0;
 	width: 100%;
 	height: 30%;
-	transition-property: top, left;
-	transition-duration: 0.3s;
+	-webkit-transition-property: top, left;
+	     -o-transition-property: top, left;
+	        transition-property: top, left;
+	-webkit-transition-duration: 0.3s;
+	     -o-transition-duration: 0.3s;
+	        transition-duration: 0.3s;
 }
 
 .sliderContainer {
@@ -293,8 +337,12 @@ body {
 	height: 10%;
 	/*padding-bottom: 2%;*/
 	font-size: 0.75em;
-	transition-property: opacity;
-	transition-duration: 0.2s;
+	-webkit-transition-property: opacity;
+	     -o-transition-property: opacity;
+	        transition-property: opacity;
+	-webkit-transition-duration: 0.2s;
+	     -o-transition-duration: 0.2s;
+	        transition-duration: 0.2s;
 }
 
 .sliderName {
