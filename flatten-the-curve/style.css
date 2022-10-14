@@ -70,8 +70,8 @@ body {
 /* Language selection */
 
 .flag {
-	height: 20%;
-	margin: 3%;
+	font-size: 2em;
+	margin: 0 5%;
 	-webkit-box-shadow: 0 0 4em rgba(0, 0, 0, 0.5);
 	        box-shadow: 0 0 4em rgba(0, 0, 0, 0.5);
 	-webkit-transition: -webkit-transform 0.3s;
