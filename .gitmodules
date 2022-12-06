@@ -1,3 +1,6 @@
 [submodule "flatten-the-curve"]
 	path = flatten-the-curve
 	url = https://github.com/Soni-Sona/flatten-the-curve.git
+[submodule "Qubits"]
+	path = Qubits
+	url = https://github.com/Soni-Sona/Qubits.git
